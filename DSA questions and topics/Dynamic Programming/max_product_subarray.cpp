@@ -30,7 +30,7 @@ int maxProduct(vector<int>& nums) {
                 swap(maxi, mini);
             }
             maxi = max(nums[i], nums[i]*maxi);
-            mini = max(nums[i], nums[i]*mini);
+            mini = min(nums[i], nums[i]*mini);
             ans = max(maxi, ans);
         }
         return ans;
