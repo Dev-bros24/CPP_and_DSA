@@ -1,6 +1,14 @@
 #include<iostream>
 using namespace std;
 
+/*
+If function calling is getting known at compile time --> Static binding
+If function calling is getting known ar runtime --> Dynamic Binding
+
+If we call the function from a Base class pointer that is pointing to derived class object
+then at runtime this decision takes place and this is known as Dynamic binding.
+*/
+
 class BaseClass{
     public:
     int var_base = 1;

@@ -18,6 +18,12 @@ class Number{
     }
 
     void display(void);
+
+    // Number& operator = (Number& num){
+    //     cout<<"Assignment operator called!!"<<endl;
+    //     this->a = num.a;
+    //     return *this;
+    // }
 };
 
 void Number :: display(void){
