@@ -26,6 +26,16 @@ int optimum(int n) // O(no. of set bits)
     return count;
 }
 
+
+int setBits(int num){
+    int count = 0;
+    int size = sizeof(num);
+    for(int i=0; i<size*8; i++){
+        if(1<<i & num) count++;
+    }
+    return count;
+}
+
 int main(){
     int n;
 

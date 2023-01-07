@@ -1,6 +1,10 @@
 #include<iostream>
 using namespace std;
 
+/*
+Constructor can never be static
+*/
+
 class Complex{
     int a, b;
     public:

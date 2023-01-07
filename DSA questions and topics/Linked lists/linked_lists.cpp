@@ -20,6 +20,15 @@ void printLinkedlist(node *head)
     }
 }
 
+
+int countNodes(node* head)
+{
+	static int count = 0;
+	if(!head) return count;
+	count++;
+	countNodes(head->next);
+}
+
 int main()
 {
     node *head;
@@ -48,6 +57,8 @@ int main()
     third->next = NULL;
 
     printLinkedlist(head);
+
+    cout<<"\nNodes: "<<countNodes(head);
 
     delete (first);
 

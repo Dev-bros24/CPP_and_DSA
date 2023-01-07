@@ -21,7 +21,7 @@ int partition(int *A, int low, int high)
     int pivot = A[low], i = low + 1, j = high;
     do
     {
-        while (A[i] <= pivot)
+        while (A[i] <= pivot)   // i<=high should be included
         {
             i++;
         }
@@ -51,7 +51,7 @@ void quickSort(int *A, int low, int high)
     if (low < high)
     {
         int partitionIndex = partition(A, low, high);
-        printArray(A, 8);
+        // printArray(A, 8);
         quickSort(A, low, partitionIndex - 1);
         quickSort(A, partitionIndex + 1, high);
     }

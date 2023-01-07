@@ -77,3 +77,40 @@ int main(){
 
     return 0;
 }
+
+/*
+
+Difference between template<class T> and template<typename T>
+
+typename and class are interchangeable in the basic case of specifying a template:
+
+template<class T>
+class Foo
+{
+};
+and
+
+template<typename T>
+class Foo
+{
+};
+are equivalent.
+
+Having said that, there are specific cases where there is a difference between typename and class.
+
+The first one is in the case of dependent types. typename is used to declare when you are referencing a nested type that depends on another template parameter, such as the typedef in this example:
+
+template<typename param_t>
+class Foo
+{
+    typedef typename param_t::baz sub_t;
+};
+The second one you actually show in your question, though you might not realize it:
+
+template < template < typename, typename > class Container, typename Type >
+When specifying a template template, the class keyword MUST be used as above -- it is not interchangeable with typename in this case (note: since C++17 both keywords are allowed in this case).
+
+You also must use class when explicitly instantiating a template:
+
+template class Foo<int>;
+*/

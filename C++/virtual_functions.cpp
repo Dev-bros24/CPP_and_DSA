@@ -9,6 +9,14 @@ If we call the function from a Base class pointer that is pointing to derived cl
 then at runtime this decision takes place and this is known as Dynamic binding.
 */
 
+
+/*
+Inside the main base class only we have to write the function with
+virtual keyword. Now, the function of that class will be called at
+whose object the pointer is pointing. This pointer can be of any 
+of the derived classes of this base class. 
+*/
+
 class BaseClass{
     public:
     int var_base = 1;

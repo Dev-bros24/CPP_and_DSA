@@ -77,7 +77,6 @@ bool everyBlock(vector<vector<int>> &grid){
                 }
             }
         }
-        // cout<<"Abhishek: start: "<<start.first<<" "<<start.second<<endl;
 
         int ans = solveGrid(grid, start.first, start.second, end);
 
@@ -92,7 +91,7 @@ int main(){
 
     vector<vector<int>> grid{{1,0,0,0},
                             {0,0,0,0},
-                            {0,0,0,2}};   // Not correct, should be 4
+                            {0,0,0,2}};
 
     int ans = uniquePathsIII(grid);
 
