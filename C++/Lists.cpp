@@ -1,5 +1,6 @@
 #include<iostream>
 #include<list>
+// #include<forward_list> // forward list is singly linked list
 #include<algorithm>
 using namespace std;
 

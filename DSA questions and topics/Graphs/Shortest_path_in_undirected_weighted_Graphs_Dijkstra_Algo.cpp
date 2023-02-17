@@ -8,6 +8,26 @@
 #include"../abhi.h"
 using namespace std;
 
+/*
+    Steps in Djakstra's Algo :
+    1. Take two DS, one vector with INT_MAX values to store minimum distances of all nodes from
+    source and other set or priority queue to fetch the minimum distance
+    node everytime.
+    2. Now initially mark distance of source node as 0 in distance vector
+    and insert (0, src) entry in set/priority queue.
+    3. Now iterate while set is non empty.
+    4. Everytime take the topNode, remove it and check the distance of its neighbours
+    from this node and check if the distance that is there in the vector 
+    is more than the distance that we are getting from this node. If that is 
+    true, then remove if there is any previous entry of this node in the
+    distance vector with the distance mentioned in the distance vector(coz anyways 
+    we're going to create a new entry for exploration with this smaller
+    distance).
+    5. Now update the distance to this new distance in the distance vector.
+    6. Create an entry in the set DS with this new distance and this node.
+    7. After the iteration stops return the distance vector.
+*/
+
 template <typename T>
 class Graph{
     private:

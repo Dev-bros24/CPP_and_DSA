@@ -4,7 +4,7 @@
 using namespace std;
 
 /*
-Steps:
+Steps for Kahn's Algorithm:
 1. Find out indegree of all the nodes.
 2. Push all the nodes with 0 indegree into the queue.
 3. take the frontNode and pop it out of the queue and push it into the

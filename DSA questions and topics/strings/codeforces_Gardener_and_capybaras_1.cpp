@@ -1,9 +1,11 @@
 #include<iostream>
 #include<cstring>
+#include<vector>
 using namespace std;
 
 int main(){
     int t;
+    // cout<<"Enter: "<<endl;
     cin>>t;
 
     while(t--){
@@ -19,7 +21,7 @@ int main(){
                 string b = s.substr(i+1, j-i);
                 string c = s.substr(j+1, n-j-1);
                 if((a.compare(b)>=0 && c.compare(b)>=0) || a.compare(b)<=0 && c.compare(b)<=0){
-                    cout<<"Abhishek: "<<t<<endl;
+                    // cout<<"Abhishek: "<<t<<endl;
                     cout<<a<<" "<<b<<" "<<c<<endl;
                     flag = true;
                 }
@@ -28,6 +30,5 @@ int main(){
             if(flag) break;
         }
         if(!flag) cout<<":("<<endl;
-
     }
 }
