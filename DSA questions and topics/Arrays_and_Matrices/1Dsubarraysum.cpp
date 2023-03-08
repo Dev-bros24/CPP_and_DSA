@@ -16,6 +16,7 @@ int main(){
         ar[i] = ar[i-1] + a[i];
     }
 
+
     cout<<"The array is"<<endl;
     for(int i=1; i<=n ; i++)
     {
