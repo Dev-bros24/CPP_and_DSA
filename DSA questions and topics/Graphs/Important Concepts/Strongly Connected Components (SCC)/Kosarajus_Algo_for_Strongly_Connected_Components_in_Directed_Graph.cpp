@@ -1,7 +1,7 @@
 #include<iostream>
 #include<stack>
 #include<vector>
-#include"../abhi.h"
+#include"../../../abhi.h"
 using namespace std;
 
 /*
