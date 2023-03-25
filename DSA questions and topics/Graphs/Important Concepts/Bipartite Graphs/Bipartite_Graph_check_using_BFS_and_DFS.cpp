@@ -15,6 +15,12 @@ using namespace std;
 
     BFS & DFS --> TC = O(N+E)
                   SC = O(N+E) + O(N) + O(N)
+
+NOTE : If we are given the edges of a Graph and we have to find that a Bipartition
+    is possible or not, then we have to make an undirected Graph.
+    Example in which directed Graph will not work is below:
+    n = 4;  // starting from 1
+    graph = [[1, 4], [2, 3], [3, 4]]    
 */
 
 template<typename T>

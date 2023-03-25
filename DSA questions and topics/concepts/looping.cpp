@@ -21,6 +21,7 @@ int main(){
     }
     cout<<endl;
     //Range based looping
+    //This reference variable that we have used below can not be used in case of iterating over maps and sets.
     for(int &value : v)  // We are using reference because the value of the containers(here vector) which gets copied in this value variable are copies and not original values. Hence by using reference original values are getting printed.
     {
         cout<<value<<" ";
