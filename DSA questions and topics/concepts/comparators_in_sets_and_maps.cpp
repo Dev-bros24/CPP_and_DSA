@@ -22,7 +22,7 @@ class compare{
 
 class compare2{ // this comparator is not working in my case for maps
     public:
-    bool operator()(pair<char, int> a, pair<char, int> b)
+    bool operator()(pair<char, int> a, pair<char, int> b) const   // This is required from C++ 17 onwards, but only in case of class comparators and not functions(like in case of vectors we use without const).
     {
         return a.second > b.second;
     }
