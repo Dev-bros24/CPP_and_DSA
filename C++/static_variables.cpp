@@ -28,7 +28,7 @@ public:
     }
 };
 
-// Count is the static data member oftu class Employee
+// Count is the static data member of class Employee
 int Employee ::count; // We can initialize the static variables here
 
 int main()
