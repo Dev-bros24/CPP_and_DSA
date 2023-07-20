@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<iostream> // Not passed all test cases on Coding Ninjas
+#include<vector>
 using namespace std;
 
 void build(int ind, int low, int high, vector<int> &arr, int seg[]){

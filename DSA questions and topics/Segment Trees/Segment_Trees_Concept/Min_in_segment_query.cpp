@@ -59,7 +59,7 @@ int main(){
         cin>>arr[i];
     }
 
-    int seg[4 * n];
+    int seg[4 * n]; // proved that only 4*n element are required
     build(0, 0, n-1, arr, seg);
     cout<<"Segment Tree Build complete!"<<endl;
 

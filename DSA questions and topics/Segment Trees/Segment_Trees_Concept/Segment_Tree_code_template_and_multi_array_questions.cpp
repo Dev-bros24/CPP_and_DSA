@@ -20,7 +20,7 @@ class SegmentMin{
 
     public:
         SegmentMin(int n){
-            seg.resize(4 * n);
+            seg.resize(4 * n + 1);
         }
 
         void build(int ind, int low, int high, int arr[]){
@@ -46,7 +46,7 @@ class SegmentMin{
             }
         }
 
-        void update(int ind, int low, int high, int i, int value){    // point update
+        void update(int ind, int low, int high, int i, int value){    // Point update
             if(low == high){
                 seg[ind] = value;
                 return;
