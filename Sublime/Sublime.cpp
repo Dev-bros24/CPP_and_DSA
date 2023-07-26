@@ -1,74 +1,84 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
 using namespace std;
 
-void build(int ind, int low, int high, vector<int> &arr, int seg[]){
-    if(low == high){
-        seg[ind] = arr[low];
-        return;
+// Recursion
+int fJ(int ind, vector<int> heights){
+    static int count = 1;
+    cout<<"Count: "<<count<<endl;
+    count++;
+
+    if(ind == 0){
+        return 0;
     }
-    int mid = low + (high - low)/2;
-    build(2*ind+1, low, mid, arr, seg);
-    build(2*ind+2, mid+1, high, arr, seg);
-    seg[ind] = seg[2*ind+1] + seg[2*ind+2];
+    
+    int leftE = INT_MAX, rightE = INT_MAX;
+    leftE = fJ(ind-1, heights) + abs(heights[ind] - heights[ind - 1]);
+    if(ind>1)
+    rightE = fJ(ind-2, heights) + abs(heights[ind] - heights[ind - 2]);
+
+    return min(leftE, rightE);
 }
 
-// O(log(4*n)) ~ O(logn)
-int query(int ind, int low, int high, int l, int r, int seg[]){
-    if(r < low || high < l) return 0; // no overlap case
-    else if(low >= l && high <= r) return seg[ind]; // complete overlap
-    else{  // partial overlap
-        int mid = low + (high-low)/2;
-        int left = query(2*ind+1, low, mid, l, r, seg);
-        int right = query(2*ind+2, mid+1, high, l, r, seg);
-        return left + right;
+// Memoization
+int fJDP(int ind, vector<int> heights, vector<int> &arr){
+    static int count = 1;
+    cout<<"Count: "<<count<<endl;
+    count++;
+
+    if(ind == 0){
+        return 0;
     }
+    
+    if(arr[ind] != -1) return arr[ind];
+    int leftE = INT_MAX, rightE = INT_MAX;
+    leftE = fJDP(ind-1, heights, arr) + abs(heights[ind] - heights[ind - 1]);
+    if(ind>1)
+    rightE = fJDP(ind-2, heights, arr) + abs(heights[ind] - heights[ind - 2]);
+
+    return arr[ind] = min(leftE, rightE);
 }
 
-void update(int ind, int low, int high, int i, int seg[], int val){
-    if(low == high){
-        seg[ind] = val;
-        return;
+int frogJump(int n, vector<int> &heights){
+    int ind = n-1;
+    vector<int> arr(n, -1);
+    // return fJ(ind, heights);
+    // return fJDP(ind, heights, arr);
+
+    // Tabulation
+    // arr[0] = 0;
+    // arr[1] = abs(heights[1] - heights[0]);
+
+    // for(int i=2; i<n; i++){
+    //     int leftE = abs(heights[i] - heights[i-1]) + arr[i-1];
+    //     int rightE = abs(heights[i] - heights[i-2]) + arr[i-2];
+    //     arr[i] = min(leftE, rightE);
+    // }
+    // return arr[n-1];
+
+    // Space optimization
+    int prev2E = 0;
+    int prev1E = abs(heights[1] - heights[0]);
+    int curE = INT_MAX;
+
+    for(int i=2; i<n; i++){
+        int leftE = abs(heights[i] - heights[i-1]) + prev1E;
+        int rightE = abs(heights[i] - heights[i-2]) + prev2E;
+        curE = min(leftE, rightE);
+        prev2E = prev1E;
+        prev1E = curE;
     }
-    int mid = low + (high-low)/2;
-    if(i<=mid) update(2*ind+1, low, mid, i, seg, val);
-    if(i>mid) update(2*ind+2, mid+1, high, i, seg, val);
-    seg[ind] = seg[2*ind+1] + seg[2*ind+2];
-}
-
-void solve(){
-    int n;
-    cin>>n;
-    int arr[n];
-    for(int i=0; i<n; i++) cin>>arr[i];
-
-    int maxi = INT_MIN;
-    for(int i=0; i<n; i++) maxi = max(arr[i], maxi);
-
-    vector<int> freq(maxi+1, 0);
-    for(int i=0; i<n; i++) freq[arr[i]]++;
-
-    int seg[4*maxi+1]; 
-
-    build(0, 0, maxi, freq, seg);
-    // cout<<seg[0]<<endl;
-
-    int count = 0;
-    for(int i=0; i<n; i++){
-        update(0, 0, maxi, arr[i], seg, freq[arr[i]] - 1);
-        freq[arr[i]]--;
-        count+=query(0, 0, maxi, 1, arr[i]-1, seg);
-    }
-
-    cout<<count<<endl;
+    return curE; 
 }
 
 int main(){
-    #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    #endif
+    // vector<int> heights{10, 20, 30, 10};
+    vector<int> heights{7, 4, 4, 2, 6, 6, 3, 4};
+    // int n = 4;
+    int n = 8;
 
-    solve();
+    int ans = frogJump(n, heights);
+    cout<<"Answer: "<<ans<<endl;
 
     return 0;
 }

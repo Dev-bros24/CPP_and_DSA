@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<iostream>
 #include<vector>
 using namespace std;
 
@@ -72,7 +72,6 @@ int frogJump(int n, vector<int> &heights){
 }
 
 int main(){
-    
     // vector<int> heights{10, 20, 30, 10};
     vector<int> heights{7, 4, 4, 2, 6, 6, 3, 4};
     // int n = 4;

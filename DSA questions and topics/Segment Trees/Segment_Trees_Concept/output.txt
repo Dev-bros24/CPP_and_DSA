@@ -1,0 +1,2 @@
+Enter the number of elements of the array: 
+Enter the array elements: 
