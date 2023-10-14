@@ -1,4 +1,6 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<climits>
 using namespace std;
 
 /* Max subset product

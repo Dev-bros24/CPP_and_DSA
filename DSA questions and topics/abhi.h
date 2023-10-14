@@ -28,12 +28,12 @@ template <typename T>
 void printRange2D(vector<vector<T>> &vec){
     long long m = vec.size();
     for(long long i=0; i<m; i++){
-        if(vec[i].size()){
-            for(long long val : vec[i]){
+        // if(vec[i].size()){
+            for(T val : vec[i]){
                 cout<<val<<" ";
             }
             cout<<endl;
-        }
+        // }
     }
     cout<<endl;
 }
