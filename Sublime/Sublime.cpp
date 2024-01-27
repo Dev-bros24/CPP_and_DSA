@@ -1,6 +1,9 @@
 #include<iostream>
 #include<vector>
 #include<cstring>
+#include<algorithm>
+#include<limits>
+#include<cmath>
 using namespace std;
 
 // Recursion
@@ -567,6 +570,271 @@ void solve8(){
     cout<<res<<endl;
 }
 
+void solve9()
+{
+    int t;
+    cin>>t;
+    while(t--){
+        vector<vector<int>> vec(4, vector<int>(2));
+        for(int i=0; i<4; i++){
+            for(int j=0; j<2; j++){
+                cin>>vec[i][j];
+            }
+        }
+        int len = 0;
+        int st = vec[0][0], pt = vec[0][1];
+        for(int i=1; i<4; i++){
+            if(vec[i][0] == st){
+                len = abs(pt - vec[i][1]);
+                break;
+            }
+        }
+        cout<<len*len<<endl;
+    }
+}
+
+void solve10(){
+    int t;
+    cin>>t;
+    while(t--){
+        int size;
+        cin>>size;
+        vector<char> s(size);
+        vector<char> f(size);
+        for(int i=0; i<size; i++) cin>>s[i];
+        for(int i=0; i<size; i++) cin>>f[i];
+
+
+        int totals = 0, totalf = 0, maxi = 0;
+        for(int i=0; i<size; i++){
+            if(s[i] == f[i]) continue;
+            else if(s[i] == '1') totals++;
+            else totalf++;
+        }
+        maxi = max(totalf, totals);
+        cout<<maxi<<endl;
+    }
+}
+
+void solve11(){
+    int t;
+    cin>>t;
+    while(t--){
+        long long n, f, a, b;
+        cin>>n>>f>>a>>b;
+        // cout<<"n: "<<n<<" f: "<<f<<" a: "<<a<<" b: "<<b<<endl;
+        vector<int> vec(n);
+        for(int i=0; i<n; i++) cin>>vec[i];
+        int batteryStatus = f;
+        bool flag = true;
+        int time = 0;
+
+        for(int i=0; i<n; i++){
+            if(i == 0) time = vec[i];
+            else time = vec[i] - vec[i-1];
+            long long totalConsumed = (long long)time*(long long)a;
+            int lesser = INT_MAX;
+            lesser = min(totalConsumed, b);
+
+            batteryStatus -= lesser;
+            if(batteryStatus <= 0){
+                flag = false;
+                break;
+            }
+        }
+        if(flag) cout<<"yes";
+        else cout<<"no";
+        cout<<endl;
+    }
+}
+
+bool cmp(const int a, const int b){
+    return a > b;
+}
+
+void solve12(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n, m;
+        cin>>n>>m;
+        vector<int> vec1(n);
+        vector<int> vec2(m);
+        for(int i=0; i<n; i++){
+            cin>>vec1[i];
+        }
+        for(int j=0; j<m; j++){
+            cin>>vec2[j];
+        }
+
+        sort(vec1.begin(), vec1.end());
+        sort(vec2.begin(), vec2.end());
+
+        long long dS = 0;
+        int i = 0, j = n-1, k = 0, l = m-1;
+        int level = 0;
+        while(i <= j){
+            long long maxiMum = INT_MIN;
+            int diff1 = abs(vec1[i] - vec2[l]);
+            if(diff1 > maxiMum){
+                maxiMum = diff1;
+                level = 1;    
+            }
+            int diff2 = abs(vec1[i] - vec2[k]);
+            if(diff2 > maxiMum){
+                maxiMum = diff2;
+                level = 2;    
+            }
+            int diff3 = abs(vec1[j] - vec2[k]);
+            if(diff3 > maxiMum){
+                maxiMum = diff3;
+                level = 3;    
+            }
+            int diff4 = abs(vec1[j] - vec2[l]);
+            if(diff4 > maxiMum){
+                maxiMum = diff4;
+                level = 4;    
+            }
+
+            if(level == 1){
+                i++;
+                l--;
+            }
+            else if(level == 2){
+                i++;
+                k++;
+            }
+            else if(level == 3){
+                j--;
+                k++;
+            }
+            else if(level == 4){
+                j--;
+                l--;
+            }
+
+            // cout<<"maxiMum: "<<maxiMum<<" level: "<<level<<endl;
+            dS += maxiMum;
+        }
+
+        cout<<dS<<endl;
+    }
+}
+
+void solve13(){
+    int t;
+    cin>>t;
+    while(t--){
+        int h, w, xa, ya, xb, yb;
+        cin>>h>>w>>xa>>ya>>xb>>yb;
+
+        if(abs(yb - ya) > abs(xb - xa) || xb <= xa){
+            cout<<"Draw"<<endl;
+            continue;
+        }
+        else{
+                int winningRow = (xb - xa + 1)/2 + xa;
+                if((xb - xa) % 2 != 0) // only Alice can win scenario
+                {
+                    if(yb == ya || ya == yb-1 || ya == yb + 1){
+                        cout<<"Alice"<<endl;
+                        continue;
+                    }
+                    else if(yb > ya){
+                        int xDist = abs(xb - winningRow);
+                        int yDist = abs(w - yb);
+                        int maxYB = yb + min(xDist, yDist); //upto where he can Run
+                        int diffA = abs(xa - winningRow);
+                        int maxYA = ya + diffA;
+                        if(maxYA >= maxYB){
+                            cout<<"Alice"<<endl;
+                            continue;
+                        }
+                        else{
+                            cout<<"Draw"<<endl;
+                            continue;
+                        }
+                    }
+                    else{ // alice is on the right of Bob
+                        int xDist = abs(xb - winningRow);
+                        int yDist = abs(1 - yb);
+                        int minYB = yb - min(xDist, yDist); //upto where he can Run
+                        int diffA = abs(xa - winningRow);
+                        int minYA = ya - diffA;
+                        if(minYA <= minYB){
+                            cout<<"Alice"<<endl;
+                            continue;
+                        }
+                        else{
+                            cout<<"Draw"<<endl;
+                            continue;
+                        }
+                    }
+                }
+                else{ // only Bob can win
+                    if(yb == ya){
+                        cout<<"Bob"<<endl;
+                        continue;
+                    }
+                    else if(yb > ya){ // Alice is on the left of Bob
+                        int xDist = abs(winningRow - xa);
+                        int yDist = abs(1 - ya);
+                        int minYA = ya - min(xDist, yDist);
+                        int diffB = abs(xb - winningRow);
+                        int minYB = yb - diffB;
+                        if(minYB <= minYA){
+                            cout<<"Bob"<<endl;
+                            continue;
+                        }
+                        else{
+                            cout<<"Draw"<<endl;
+                            continue;
+                        }
+                    }
+                    else{
+                        int xDist = abs(winningRow - xa);
+                        int yDist = abs(w - ya);
+                        int maxYA = ya + min(xDist, yDist);
+                        int diffB = abs(xb - winningRow);
+                        int maxYB = yb + diffB;
+                        if(maxYB >= maxYA){
+                            cout<<"Bob"<<endl;
+                            continue;
+                        }
+                        else{
+                            cout<<"Draw"<<endl;
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+}
+
+#define ll long long
+
+void solve14(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n, q;
+        cin>>n>>q;
+        vector<int> arr(n);
+        for(int i=0; i<n; i++) cin>>arr[i];
+        while(q--){
+            int s, d, k;
+            cin>>s>>d>>k;
+            int j = 1;
+            long long sum = 0;
+            for(int i = s-1; i < n && j <= k; i = i + d, j++){
+                sum += arr[i]*j;
+            }
+            cout<<sum<<" ";
+        }
+        cout<<endl;
+    }
+}
+
 int main(){
     #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -580,7 +848,13 @@ int main(){
     // solve5();
     // solve6();
     // solve7();
-    solve8();
+    // solve8();
+    // solve9();
+    // solve10();
+    // solve11();
+    // solve12();
+    // solve13();
+    solve14();
 
     return 0;
 }
