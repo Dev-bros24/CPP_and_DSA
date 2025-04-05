@@ -129,7 +129,7 @@ int main(){
         edges[i][0] = u;
         edges[i][1] = v;
         edges[i][2] = w;
-        g.addEdge(u, v, w, 1);
+        g.addEdge(u, v, w, 0);
     }
 
     int src = 1, dest = 7;

@@ -7,7 +7,7 @@ using namespace std;
     int i = 0, j = 0;
     while(j<size){
         calculations
-        if(contd < k) j++;
+        if(contd < k) j++;  
         else if(contd == k){
             find answer from calculations
             j++;

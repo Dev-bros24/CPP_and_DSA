@@ -123,7 +123,10 @@ class Heap{
     }
 };
 
-
+/*
+    If there's a complete binary tree and indexing starts from 1, and let's say if there are n nodes in that tree
+    then the leaf node indexes will be from (n/2+1) -> (n)th index
+*/
 void heapify(int arr[], int n, int i) // TC of this function O(logn)
 {
     int largest = i;
