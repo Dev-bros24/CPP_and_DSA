@@ -41,27 +41,27 @@ public:
         // l r low high || low high l r
         if(r < low || high < l) return;
 
-        else if(l <= low && high <= r){ // complete overlap 
+        if(l <= low && high <= r){ // complete overlap 
             seg[ind] += value;
             if(low != high){ // lazy propagation part
                 lazy[2*ind+1] += value;
                 lazy[2*ind+2] += value;
             }
+            return;
         }
 
-        else{ // partial overlap
-            int mid = low + (high-low)/2;
-            update(2*ind+1, low, mid, l, r, value);
-            update(2*ind+2, mid+1, high, l, r, value);
-            seg[ind] = min(seg[2*ind+1], seg[2*ind+2]);
-        }
+        // partial overlap
+        int mid = low + (high-low)/2;
+        update(2*ind+1, low, mid, l, r, value);
+        update(2*ind+2, mid+1, high, l, r, value);
+        seg[ind] = min(seg[2*ind+1], seg[2*ind+2]);
     }
 
     int query(int ind, int low, int high, int l, int r){
         // update the previous remaining updates at
         // this node if any remaining
         if(lazy[ind] != 0){
-            seg[ind] += lazy[ind];
+            seg[ind] += lazy[ind];  // because in this we're calculating the minimum in the range, that's why we're just adding lazy[ind] otherwise let's say if it would've been sum then it would be (high - low + 1) * lazy[ind];
             if(low != high){
                 lazy[2*ind+1] += lazy[ind];
                 lazy[2*ind+2] += lazy[ind];

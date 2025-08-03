@@ -94,12 +94,14 @@ vector<int> dijkstra(vector<vector<int>> &vec, int vertices, int edges, int sour
 
         st.erase(st.begin());
 
+        if(topDistance > dist[topVal]) continue;
+
         for(pair<int, int> neighbours : adjList[topVal]){
             if(topDistance + neighbours.second < dist[neighbours.first]){
-                set<pair<int, int>> :: iterator record = st.find(make_pair(dist[neighbours.first], neighbours.first));
-                    if(record != st.end()){
-                        st.erase(record);
-                    }
+                // set<pair<int, int>> :: iterator record = st.find(make_pair(dist[neighbours.first], neighbours.first));
+                //     if(record != st.end()){
+                //         st.erase(record);
+                //     }
                     
                 dist[neighbours.first] = topDistance + neighbours.second;
                 st.insert(make_pair(dist[neighbours.first], neighbours.first));
