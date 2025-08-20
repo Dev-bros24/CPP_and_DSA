@@ -11,6 +11,13 @@ void printArray(vector<T> &vec){
     cout<<endl;
 }
 
+void printArray(int arr[], int n){
+    for(long long i=0; i<n; i++){
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+}
+
 template <typename T>
 void printArray2D(vector<vector<T>> &vec){
     long long m = vec.size();
